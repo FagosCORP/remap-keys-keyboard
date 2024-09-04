@@ -1,16 +1,20 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-Backspace::\
+#NoEnv  ; Recomendado para desempenho e compatibilidade com futuras versões do AutoHotkey.
+SendMode Input  ; Recomendado para novos scripts devido à sua velocidade e confiabilidade.
+SetWorkingDir %A_ScriptDir%  ; Garante um diretório de início consistente.
+
+
+#IfWinNotActive,ahk_group WorkIn
 *CapsLock::
     Send {Blind}{Ctrl Down}
     cDown := A_TickCount
 Return
 
 *CapsLock up::
-    If ((A_TickCount-cDown) < 200)  ; Modify press time as needed (milliseconds)
+    If ((A_TickCount-cDown) < 150){
         Send {Blind}{Ctrl Up}{Esc}
-    Else
+    }
+    Else {
         Send {Blind}{Ctrl Up}
+    }
 Return
+#IfWinNotActive
